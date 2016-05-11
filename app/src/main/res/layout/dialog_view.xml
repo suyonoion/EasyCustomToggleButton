@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_margin="2dp"
+            android:id="@+id/dialog_taruh_icon"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/dialog_taruh_text"
+            android:gravity="center"
+            android:layout_margin="2dp"
+            android:layout_toEndOf="@id/dialog_taruh_icon"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="#c1c1c1"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="OK"
+            android:id="@+id/dialog_tombol_ok"
+            android:background="@drawable/background_dialog"
+            android:textColor="#fe0101"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="BATAL"
+            android:id="@+id/dialog_tombol_batal"
+            android:background="@drawable/background_dialog"
+            android:textColor="#c1c1c1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="MyKode Tutorial"
+            android:id="@+id/dialog_mykode_tutorial"
+            android:gravity="center"
+            android:textColor="#4202fb"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ToggleButton
+                android:id="@+id/toggle_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/power_toggle_selector"
+                android:textOff="Boot Options"
+                android:textOn="Boot Options"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:background="@null"
+                android:textSize="10sp"
+                android:textColor="#ffffff"
+                android:padding="5dp"
+                android:visibility="visible"/>
+
+            <ToggleButton
+                android:id="@+id/toggle_reboot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/reboot_selector"
+                android:textOff="Reboot"
+                android:textOn="Reboot"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:padding="5dp"
+                android:textColor="#ffffff"
+                android:visibility="gone"/>
+
+            <ToggleButton
+                android:id="@+id/toggle_soft_reboot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/soft_reboot_selector"
+                android:textOff="Soft Reboot"
+                android:textOn="Soft Reboot"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:padding="5dp"
+                android:textColor="#ffffff"
+                android:visibility="gone"/>
+
+            <ToggleButton
+                android:id="@+id/toggle_safe_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/safemode_selector"
+                android:textOff="Safe Mode"
+                android:textOn="Safe Mode"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:padding="5dp"
+                android:textColor="#ffffff"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:id="@+id/toggle_revovery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/recovery_selector"
+            android:textOff="Recovery"
+            android:textOn="Recovery"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="gone"/>
+
+        <ToggleButton
+            android:id="@+id/toggle_bootloader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/bootloader_selector"
+            android:textOff="Bootloader"
+            android:textOn="Bootloader"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="gone"/>
+
+        <ToggleButton
+            android:id="@+id/toggle_shutdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/shutdown_selector"
+            android:textOff="Shutdown"
+            android:textOn="Shutdown"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:id="@+id/toggle_restartui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/restartui_selector"
+            android:textOff="RestartUI OFF"
+            android:textOn="RestartUI ON"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="visible"/>
+
+        <ToggleButton
+            android:id="@+id/toggle_mobile_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/mobile_data_selector"
+            android:textOff="Data OFF"
+            android:textOn="Data ON"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="visible"/>
+
+        <ToggleButton
+            android:id="@+id/toggle_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/wifi_selector"
+            android:textOff="WiFi OFF"
+            android:textOn="WiFi ON"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="visible"/>
+
+        <ToggleButton
+            android:id="@+id/toggle_bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/bluetooth_selector"
+            android:textOff="Bluetooth OFF"
+            android:textOn="Bluetooth ON"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:visibility="visible"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ToggleButton
+                android:id="@+id/toggle_pesawat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/pesawat_selector"
+                android:textOff="Pesawat OFF"
+                android:textOn="Pesawat ON"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:textColor="#ffffff"
+                android:visibility="visible"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
