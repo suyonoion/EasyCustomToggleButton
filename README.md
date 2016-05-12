@@ -19,13 +19,13 @@ Contoh tindakan untuk menerapkannya disini seperti mengaktifkan "Mode Pesawat", 
     - Toggle Airplane;
     
 # Kode :
-```
+````
      <!-- Memanggil ToggleView.java -->
      <mykodetutorial.blogspot.com.easycustomtogglebutton.ToggleView
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:background="#4052b5"/>
-```.
+````
 
 # Demo APK
 [Download Custom Toggle Button Preview](https://raw.githubusercontent.com/suyonoion/EasyCustomToggleButton/master/demo/easy_custom_toggle_button.apk)
