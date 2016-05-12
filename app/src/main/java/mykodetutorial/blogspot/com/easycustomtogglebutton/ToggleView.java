@@ -52,6 +52,26 @@ public class ToggleView extends LinearLayout {
             = new String[] {"settings put global airplane_mode_on 1","am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true"};
     private static final String[] MODE_PESAWAT_MATI
             = new String[] {"settings put global airplane_mode_on 0","am broadcast -a android.intent.action.AIRPLANE_MODE --ez state false"};
+    
+    /* String dialog */
+    String BELUM_ROOT =  "Phone not Rooted..!! Sebaiknya di Root terlebih dahulu Androidnya ya gan :)";
+    String[] MUNCUL_DIALOG_TEXT = {
+            //MUNCUL_DIALOG_TEXT[0]
+            "Tindakan ini akan memulai kembali device anda. Apakah anda yakin ?",
+            //MUNCUL_DIALOG_TEXT[1]
+            "Tindakan ini akan memulai kembali device anda secara soft. Apakah anda yakin ?",
+            //MUNCUL_DIALOG_TEXT[2]
+            "Tindakan ini akan menyalakan device anda dalam mode aman (Safe Mode). Apakah anda yakin ?",
+            //MUNCUL_DIALOG_TEXT[3]
+            "Tindakan ini akan masuk kedalam mode Recovery (Stock/Custom Recovey). Apakah anda yakin ?",
+            //MUNCUL_DIALOG_TEXT[4]
+            "Tindakan ini akan menuju ke mode Bootloader / fastboot. Apakah anda yakin ?",
+            //MUNCUL_DIALOG_TEXT[5]
+            "Tindakan ini akan mematikan device anda. Apakah anda yakin ?",
+            //MUNCUL_DIALOG_TEXT[6]
+            "Tindakan ini akan memulai kembali SystemUI. Apakah anda yakin ?"
+    };
+    String BELUM_ROOT_KOK_UDAH_NYOBAIN_SIH = "Diperlukan akses root, silahkan di root terlebih dahulu gan...!! Terimakasih.";
 
     // SharedPreferences
     SharedPreferences pref_power;
@@ -127,6 +147,15 @@ public class ToggleView extends LinearLayout {
             }
         });
 
+        /* Cek Root saat pertama kali memasang guide */
+        if (!Shell.SU.available()){
+            LinearLayout cekrootView = (LinearLayout) root.findViewById(setResource("cekroot_view","id"));
+            ImageView cekrootIcon = (ImageView) root.findViewById(setResource("cekroot_icon","id"));
+            TextView cekrootPesan = (TextView) root.findViewById(setResource("cekroot_pesan","id"));
+            cekrootView.setVisibility(View.VISIBLE);
+            cekrootIcon.setImageResource(setResource("su_icon","drawable"));
+            cekrootPesan.setText(BELUM_ROOT_KOK_UDAH_NYOBAIN_SIH);
+        }
         /*************************************
          * Tindakan jika ToggleButton di klik
          *************************************/
@@ -171,11 +200,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Rebooting ...");
                 dialog_icon.setImageResource(setResource("reboot_on","drawable"));
-                dialog_text.setText("Tindakan ini akan memulai kembali device anda. Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[0]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("reboot");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("reboot");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_reboot);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -197,11 +230,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Soft Rebooting ...");
                 dialog_icon.setImageResource(setResource("soft_reboot_on","drawable"));
-                dialog_text.setText("Tindakan ini akan memulai kembali device anda secara soft. Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[1]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("soft_reboot");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("soft_reboot");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_soft_reboot);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -223,11 +260,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Safe Mode ...");
                 dialog_icon.setImageResource(setResource("safemode_on","drawable"));
-                dialog_text.setText("Tindakan ini akan menyalakan device anda dalam mode aman (Safe Mode). Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[2]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("safe_mode");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("safe_mode");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_safe_mode);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -249,11 +290,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Recovery ...");
                 dialog_icon.setImageResource(setResource("recovery_on","drawable"));
-                dialog_text.setText("Tindakan ini akan masuk kedalam mode Recovery (Stock/Custom Recovey). Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[3]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("recovery");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("recovery");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_revovery);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -274,11 +319,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Bootloader / Fastboot ...");
                 dialog_icon.setImageResource(setResource("bootloader_on","drawable"));
-                dialog_text.setText("Tindakan ini akan menuju ke mode Bootloader / fastboot. Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[4]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("bootloader");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("bootloader");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_bootloader);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -300,11 +349,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Mematikan ...");
                 dialog_icon.setImageResource(setResource("shutdown_on","drawable"));
-                dialog_text.setText("Tindakan ini akan mematikan device anda. Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[5]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("modar");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("modar");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_shutdown);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -325,11 +378,15 @@ public class ToggleView extends LinearLayout {
                 // meyakinkan pengguna dengan dialog
                 dialog_view.setTitle("Restarting UI ...");
                 dialog_icon.setImageResource(setResource("restart_on","drawable"));
-                dialog_text.setText("Tindakan ini akan memulai kembali SystemUI. Apakah anda yakin ?");
+                dialog_text.setText(MUNCUL_DIALOG_TEXT[6]);
                 dialog_tombol_ok.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (new StartUp()).setContext().execute("sysui");
+                        if(Shell.SU.available()) {
+                            (new StartUp()).setContext().execute("sysui");
+                        } else {
+                            munculkanDialogBelumRootUntuk(toggle_restartui);
+                        }
                     }
                 });
                 dialog_tombol_cancel.setOnClickListener(new OnClickListener() {
@@ -356,10 +413,14 @@ public class ToggleView extends LinearLayout {
         toggle_data.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    (new StartUp()).setContext().execute("on_data");
+                if (Shell.SU.available()) {
+                    if (isChecked) {
+                        (new StartUp()).setContext().execute("on_data");
+                    } else {
+                        (new StartUp()).setContext().execute("off_data");
+                    }
                 } else {
-                    (new StartUp()).setContext().execute("off_data");
+                    munculkanDialogBelumRootUntuk(toggle_data);
                 }
             }
         });
@@ -380,10 +441,14 @@ public class ToggleView extends LinearLayout {
         toggle_wifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    (new StartUp()).setContext().execute("on_wifi");
+                if (Shell.SU.available()) {
+                    if (isChecked) {
+                        (new StartUp()).setContext().execute("on_wifi");
+                    } else {
+                        (new StartUp()).setContext().execute("off_wifi");
+                    }
                 } else {
-                    (new StartUp()).setContext().execute("off_wifi");
+                    munculkanDialogBelumRootUntuk(toggle_wifi);
                 }
             }
         });
@@ -404,10 +469,14 @@ public class ToggleView extends LinearLayout {
         toggle_bluetooth.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    (new StartUp()).setContext().execute("on_blutut");
+                if(Shell.SU.available()) {
+                    if (isChecked) {
+                        (new StartUp()).setContext().execute("on_blutut");
+                    } else {
+                        (new StartUp()).setContext().execute("off_blutut");
+                    }
                 } else {
-                    (new StartUp()).setContext().execute("off_blutut");
+                    munculkanDialogBelumRootUntuk(toggle_bluetooth);
                 }
             }
         });
@@ -428,10 +497,14 @@ public class ToggleView extends LinearLayout {
         toggle_pesawat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    (new StartUp()).setContext().execute("on_pesawat");
+                if(Shell.SU.available()) {
+                    if (isChecked) {
+                        (new StartUp()).setContext().execute("on_pesawat");
+                    } else {
+                        (new StartUp()).setContext().execute("off_pesawat");
+                    }
                 } else {
-                    (new StartUp()).setContext().execute("off_pesawat");
+                    munculkanDialogBelumRootUntuk(toggle_pesawat);
                 }
             }
         });
@@ -444,14 +517,11 @@ public class ToggleView extends LinearLayout {
      * AsyncTask
      ****************************************************************/
     private class StartUp extends AsyncTask<String,Void,Void> {
-        boolean suAvailable = false;
         public StartUp setContext() {
             return this;
         }
         @Override
         protected Void doInBackground(String... params) {
-            suAvailable = Shell.SU.available();
-            if (suAvailable) {
                 /* Kumpulan script Shell su
                  * Tes manualnya di Terminal Emulator apk
                  */
@@ -472,11 +542,6 @@ public class ToggleView extends LinearLayout {
                     case "on_pesawat"   : Shell.SU.run(MODE_PESAWAT_NYALA);break;
                     case "off_pesawat"   : Shell.SU.run(MODE_PESAWAT_MATI);break;
                 }
-            }
-            else{
-                //jika HH belum root
-                Toast.makeText(mContext, "Phone not Rooted /n Sebaiknya di Root dulu HH nya ya gan :)", Toast.LENGTH_SHORT).show();
-            }
             return null;
         }
     }
@@ -491,9 +556,17 @@ public class ToggleView extends LinearLayout {
     }
 
     /* mengganti id menjadi string */
-    public int setResource(String nama, String tipe){
+    private int setResource(String nama, String tipe){
         return getContext().getResources().getIdentifier(nama,tipe,getContext().getPackageName());
     }
+
+    private void munculkanDialogBelumRootUntuk(ToggleButton toggleButton){
+        //jika HH belum root
+        Toast.makeText(mContext, BELUM_ROOT, Toast.LENGTH_LONG).show();
+        dialog_view.dismiss();
+        toggleButton.setChecked(false);
+    }
+    
 }
 
 /* Author    : suyonoion
